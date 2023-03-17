@@ -22,7 +22,7 @@ I had 5 main questions I wanted answered from the data:
 
 - MySQL
 
-<h2>Program walk-through:</h2>
+<h3>Preparing the data:</h3>
 
 First I had to import the 2 .CSV files i needed into MySQL workbench. One file imported completely through the import wizard but I had to import another one manualy using command lines. 
 <br />
@@ -41,7 +41,7 @@ IGNORE 1 ROWS;
 <br />
 <br />
 I now had 2 tables imported. One had the combine results of players and the other had draft selection and career results. I then used the JOIN function to merge the tables into one.
-<br />
+
 ```
 # Join the tables by player names
 CREATE TABLE nba.full_stats
@@ -50,6 +50,7 @@ FROM nba.draft_combine_stats
 Join nba.nba_players_career_data 
 ON draft_combine_stats.player_name = nba_players_career_data.player;
 ```
+
 <br />
 <br />
 My next step was to clean the new table I created. I did this by finding differences in the year values of the draft.
@@ -84,7 +85,7 @@ WHERE player_id = 201147
 ```
 <br />
 <br />
-I then adjusted the data so that players had uniform position names
+I then adjusted the data so that players had uniform position names.
 
 ```
 # Merge PF-C and C-PF as same position
@@ -111,7 +112,7 @@ WHERE position LIKE '%SG-PG%'
 <br />
 <br />
 
-<h3>Now that the data is clean and transformed, I answer Question 1 by finding the number of players in each position drafted who played in NBA games</h3>
+<h3>Question 1, finding how many were drafted in each position.</h3>
 
 ```
 # Used LIKE because some players play multiple positions
@@ -142,7 +143,7 @@ WHERE position LIKE '%C%'
 ```
 <br />
 <br />
-<h3>Question 2, finding the average vertical jump and bench press for each position</h3>
+<h3>Question 2, finding the average vertical jump and bench press for each position.</h3>
 
 ```
 # Find the average vertical and bench press for each position
@@ -151,6 +152,7 @@ SELECT position, AVG(standing_vertical_leap) AS avg_standing_vertical, AVG(bench
 FROM nba.full_stats
 GROUP BY position;
 ```
+![image](https://user-images.githubusercontent.com/127700723/226064050-dfc46049-9b2f-49ee-88ce-170e229c86c2.png)
 <br />
 <br />
 I made an interesting observation. I noticed the bench press averages were significantly higher for players who played 2 positions. I decided to comare the averages between players who are listed at 1 and 2 positions.
@@ -169,9 +171,11 @@ FROM nba.full_stats
 GROUP BY group_position;
  
 ```
+<a href="https://imgur.com/afohBWA"><img src="https://i.imgur.com/afohBWA.png" title="source: imgur.com" /></a>
 <br />
 <br />
-<h3>Question 3, finding the average draft selection by position</h3>
+
+<h3>Question 3, finding the average draft selection by position.</h3>
 
 ```
 
@@ -182,9 +186,10 @@ FROM nba.full_stats
 GROUP BY position 
 
 ```
+<a href="https://imgur.com/GoQ5UDn"><img src="https://i.imgur.com/GoQ5UDn.png" title="source: imgur.com" /></a>
 <br />
 <br />
-<h3>Question 4, find average height and tallest/shortest players</h3>
+<h3>Question 4, find average height and tallest/shortest players.</h3>
  
 ```
 # Finds the tallest and shortest player in each position and lists their names
@@ -200,13 +205,15 @@ GROUP BY full_stats.position
 ORDER BY tallest_height DESC;
  
 ```
+<a href="https://imgur.com/CCumtqE"><img src="https://i.imgur.com/CCumtqE.png" title="source: imgur.com" /></a>
 <br />
 <br />
-<h3>Question 5, Average minutes played per position</h3>
+<h3>Question 5, Average minutes played per position.</h3>
 
 ```
 # Finds the average minutes of each position per game
 SELECT position, COUNT(*) AS player_count, AVG(average_minutes_played) AS average_minutes
 FROM nba.full_stats
 GROUP BY position 
-
+```
+<a href="https://imgur.com/Az7Vgxt"><img src="https://i.imgur.com/Az7Vgxt.png" title="source: imgur.com" /></a>
