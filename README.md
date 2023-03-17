@@ -27,7 +27,6 @@ I had 5 main questions I wanted answered from the data:
 First I had to import the 2 .CSV files i needed into MySQL workbench. One file imported completely through the import wizard but I had to import another one manualy using command lines. 
 <br />
 ```
-
 SET GLOBAL local_infile = 1
 
 
@@ -39,6 +38,8 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
 ```
+<br />
+<br />
 I now had 2 tables imported. One had the combine results of players and the other had draft selection and career results. I then used the JOIN function to merge the tables into one.
 <br />
 ```
@@ -81,7 +82,36 @@ WHERE player_id = 1628972
 DELETE FROM nba.full_stats
 WHERE player_id = 201147
 ```
-Now that the data is clean and transformed, I answer Question 1 by finding the number of players in each position drafted who played in NBA games
+<br />
+<br />
+I then adjusted the data so that players had uniform position names
+
+```
+# Merge PF-C and C-PF as same position
+UPDATE nba.full_stats
+SET position = REPLACE(position, 'C-PF', 'PF-C')
+WHERE position LIKE '%C-PF%' 
+
+# Merge SF-PF and PF-SF
+UPDATE nba.full_stats
+SET position = REPLACE(position, 'PF-SF', 'SF-PF')
+WHERE position LIKE '%PF-SF%' 
+
+# Merge SG-SF and SF-SG
+UPDATE nba.full_stats
+SET position = REPLACE(position, 'SF-SG', 'SG-SF')
+WHERE position LIKE '%SF-SG%' 
+
+# Merge PG-SG and SG-PG
+UPDATE nba.full_stats
+SET position = REPLACE(position, 'SG-PG', 'PG-SG')
+WHERE position LIKE '%SG-PG%' 
+
+```
+<br />
+<br />
+
+<h3>Now that the data is clean and transformed, I answer Question 1 by finding the number of players in each position drafted who played in NBA games</h3>
 
 ```
 # Used LIKE because some players play multiple positions
@@ -110,87 +140,73 @@ SELECT COUNT(*)
 FROM nba.full_stats
 WHERE position LIKE '%C%'
 ```
+<br />
+<br />
+<h3>Question 2, finding the average vertical jump and bench press for each position</h3>
 
-
-<br />
-<br />
-
-<br />
-<br />
-<br />
-<br />
-
-<br />
-<br />
-<a href="https://imgur.com/GzIzJRq"><img src="https://i.imgur.com/GzIzJRq.png" title="source: imgur.com" /></a>
-<br />
-<br />
-<a href="https://imgur.com/gAtJAsv"><img src="https://i.imgur.com/gAtJAsv.png" title="source: imgur.com" /></a>
-<br />
-<br />
-<br />
-<br />
-After thoroughly cleaning the data, I launched Power BI and connected it to the MySQL database. <br/>
-<br />
-<br />
-<a href="https://imgur.com/6IbS6UQ"><img src="https://i.imgur.com/6IbS6UQ.png" title="source: imgur.com" /></a>
-<br />
-<br />
-<br />
-<br />
-I then needed to calculate extra values to create the visuals. I used formulas in the data view to create calculations and new columns to create insightful visualizations.  <br/>
-<br />
-<br />
-<a href="https://imgur.com/LLYmDr0"><img src="https://i.imgur.com/LLYmDr0.png" title="source: imgur.com" /></a>
-<br />
-<br />
-<a href="https://imgur.com/Ho4vdOw"><img src="https://i.imgur.com/Ho4vdOw.png" title="source: imgur.com" /></a>
-<br />
-<br />
-<br />
-<br />
-I then proceeded to create the visualizations. I kept in mind the goal of the project which was to compare Subscribers to Casual Customers when creating the charts. I compared the trip data between the two across multiple metrics such as trip duration, day of the week, gender, and time of day<br />
-<br />
-<br />
-<a href="https://imgur.com/n8jxnz2"><img src="https://i.imgur.com/n8jxnz2.png" title="source: imgur.com" /></a>
-<br />
-<br />
-<a href="https://imgur.com/bMLel9Q"><img src="https://i.imgur.com/bMLel9Q.png" title="source: imgur.com" /></a>
-<br />
-<br />
-<a href="https://imgur.com/gm2jrq7"><img src="https://i.imgur.com/gm2jrq7.png" title="source: imgur.com" /></a>
-<br />
-<br />
-<br />
-<br />
-After I selected the most relevant charts, I created a PowerPoint presentation to present to investors. This included my conclusion to my analysis and my recommendations for converting Casual Riders to Subscribers.
-<br />
-<br />
-<a href="https://imgur.com/l1hmOY9"><img src="https://i.imgur.com/l1hmOY9.png" title="source: imgur.com" /></a>
-<br />
-<br />
-<h1>Conclusion</h1>
-My prior analysis lead me to the conclusion that Casual Riders typically use the service for longer leisure trips and Subscribers use it for regular commutes. My conclusion is backed by the data and can be clearly understood by visualizations. 
-<br />
-<br />
-I made 3 recommendations to convert Casual riders to Subscribers.
-<br />
-<br />
-1. Visitors of Chicago are not incentivized to subscribe, unless they have access to the same service in their home city or if they travel to other cities enough with the service provided. Expanding service to other cities will increase subscribers for travelers and workers who frequently travel.
-<br />
-<br />
-2. Adding another type of subscription service may be beneficial. Whether it be for weekend use or seasonal. However, this may discourage people to sign up annually and choose the smaller commitment.
-<br />
-<br />
-3. Increasing the cost of weekend rides could make Casual Riders more inclined to switch to subscription service if they frequently use the bikes on weekends.
-
-</p>
-
-<!--
- ```diff
-- text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
 ```
+# Find the average vertical and bench press for each position
+
+SELECT position, AVG(standing_vertical_leap) AS avg_standing_vertical, AVG(bench_press) AS avg_bench_press
+FROM nba.full_stats
+GROUP BY position;
+```
+<br />
+<br />
+I made an interesting observation. I noticed the bench press averages were significantly higher for players who played 2 positions. I decided to comare the averages between players who are listed at 1 and 2 positions.
+
+```
+# From the result of the previous query, I noticed that those who played 2 positions on average had a higher bench press, decided to compare 2 VS 1 position stats
+
+SELECT
+  CASE 
+    WHEN position LIKE '%-%' THEN 'Two Positions' 
+    ELSE 'One Position' 
+  END AS group_position, 
+  AVG(standing_vertical_leap) AS avg_standing_vertical, 
+  AVG(bench_press) AS avg_bench_press 
+FROM nba.full_stats
+GROUP BY group_position;
+ 
+```
+<br />
+<br />
+<h3>Question 3, finding the average draft selection by position</h3>
+
+```
+
+# Finds the player count of each position and the average selection in the draft
+
+SELECT position, COUNT(*) AS player_count, AVG(overall_pick) AS average_selection
+FROM nba.full_stats
+GROUP BY position 
+
+```
+<br />
+<br />
+<h3>Question 4, find average height and tallest/shortest players</h3>
+ 
+```
+# Finds the tallest and shortest player in each position and lists their names
+SELECT full_stats.position, 
+       MAX(p1.height_wo_shoes) AS tallest_height, 
+       MIN(p2.height_wo_shoes) AS shortest_height, 
+       SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT p1.player_name ORDER BY p1.height_wo_shoes DESC SEPARATOR ', '), ',', 1) AS tallest_player, 
+       SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT p2.player_name ORDER BY p2.height_wo_shoes ASC SEPARATOR ', '), ',', 1) AS shortest_player 
+FROM nba.full_stats AS full_stats
+JOIN nba.full_stats AS p1 ON full_stats.position = p1.position AND full_stats.height_wo_shoes = p1.height_wo_shoes
+JOIN nba.full_stats AS p2 ON full_stats.position = p2.position AND full_stats.height_wo_shoes = p2.height_wo_shoes
+GROUP BY full_stats.position
+ORDER BY tallest_height DESC;
+ 
+```
+<br />
+<br />
+<h3>Question 5, Average minutes played per position</h3>
+
+```
+# Finds the average minutes of each position per game
+SELECT position, COUNT(*) AS player_count, AVG(average_minutes_played) AS average_minutes
+FROM nba.full_stats
+GROUP BY position 
+
