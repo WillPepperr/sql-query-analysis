@@ -7,17 +7,22 @@
 The NBA began recording measurements of NBA prospects before the 2000-2001 NBA season. Since then, many athletes choose to have their physical attributes recorded to impress teams and advance their draft position. I wanted to compare the results of the positions of players entering the draft and how their position affects their physical attributes. My goal is to answer the following question. What physical attributes, on average, does an aspiring NBA draft selection need, for his position, to have to be picked and play in the NBA? 
 <br />
 <br />
-I had 5 main questions I wanted answered from the data:
+I thought of 5 main questions an analyst must know to understand the data.
+<br />
 <br />
 1. How many players were drafted in each position that played in NBA games?
 <br />
-2. What i the average vertial jump and bench press of each position?
+<br />
+2. What is the average vertical jump and bench press of each position?
+<br />
 <br />
 3. What is the average draft selection of each position?
 <br />
+<br />
 4. What is the average height for each position? Who is the tallest and shortest?
 <br />
-5. What is the average minutes played per game for each position?
+<br />
+5. What are the average minutes played per game for each position?
 <br />
 <br />
 
