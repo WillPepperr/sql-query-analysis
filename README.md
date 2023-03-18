@@ -2,7 +2,7 @@
 
 
 <h2>Description</h2>
-The NBA began recording measurements of NBA prospects before the 2000-2001 NBA season. Since then, many athletes choose to have their physical attributes recorded to impress teams and advance their draft position. I wanted to compare the results of the positions of players entering the draft and how their position effects their physical attributes. I uesd MySQL for my analysis.
+The NBA began recording measurements of NBA prospects before the 2000-2001 NBA season. Since then, many athletes choose to have their physical attributes recorded to impress teams and advance their draft position. I wanted to compare the results of the positions of players entering the draft and how their position effects their physical attributes. My goal is to answer the following question. What physical attributes, on average, does he need, for his position, to have to be selected and play in the NBA? I uesd MySQL for my analysis.
 <br />
 <br />
 I had 5 main questions I wanted answered from the data:
@@ -217,3 +217,28 @@ FROM nba.full_stats
 GROUP BY position 
 ```
 <a href="https://imgur.com/Az7Vgxt"><img src="https://i.imgur.com/Az7Vgxt.png" title="source: imgur.com" /></a>
+
+
+<H2>Conclusion</H2>
+I learned a lot from working with this dataset. My most noteable observation was that the average player who is listed at
+2 positions is able to bench press almost 2 reps (25%) more than a player who plays a single position across all positions. 
+This  indicates stregnth is important factor of being a more vercitile player. I also spotted average minutes played among
+players who played 2 positions were higher than those with 1 by about %15. However, only 30% of players who were drafted 
+identified themselves as a 2 position player. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
