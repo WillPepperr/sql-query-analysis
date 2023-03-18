@@ -1,8 +1,10 @@
-<h1>NBA Draft </h1>
+<h1>NBA Draft Combine </h1>
 
+
+<a href="https://imgur.com/s5fkL8N"><img src="https://i.imgur.com/s5fkL8N.png" title="source: imgur.com" /></a>
 
 <h2>Description</h2>
-The NBA began recording measurements of NBA prospects before the 2000-2001 NBA season. Since then, many athletes choose to have their physical attributes recorded to impress teams and advance their draft position. I wanted to compare the results of the positions of players entering the draft and how their position effects their physical attributes. My goal is to answer the following question. What physical attributes, on average, does an aspiring NBA draft selection need, for his position, to have to be picked and play in the NBA? 
+The NBA began recording measurements of NBA prospects before the 2000-2001 NBA season. Since then, many athletes choose to have their physical attributes recorded to impress teams and advance their draft position. I wanted to compare the results of the positions of players entering the draft and how their position affects their physical attributes. My goal is to answer the following question. What physical attributes, on average, does an aspiring NBA draft selection need, for his position, to have to be picked and play in the NBA? 
 <br />
 <br />
 I had 5 main questions I wanted answered from the data:
@@ -18,13 +20,15 @@ I had 5 main questions I wanted answered from the data:
 5. What is the average minutes played per game for each position?
 <br />
 <br />
+
+
 <h2>Languages and Programs Used</h2>
 
 - MySQL
 
 <h3>Preparing the data:</h3>
 
-First I had to import the 2 .CSV files i needed into MySQL workbench. One file imported completely through the import wizard but I had to import another one manualy using command lines. 
+First I had to import the 2 .CSV files I needed into MySQL workbench. One file was imported completely through the import wizard but I had to import another one manually using command lines. 
 <br />
 ```
 SET GLOBAL local_infile = 1
@@ -40,7 +44,7 @@ IGNORE 1 ROWS;
 ```
 <br />
 <br />
-I now had 2 tables imported. One had the combine results of players and the other had draft selection and career results. I then used the JOIN function to merge the tables into one.
+I now had 2 tables imported. One had the Combine results of players and the other had the draft selection and career results. I then used the JOIN function to merge the tables into one.
 
 ```
 # Join the tables by player names
@@ -155,7 +159,7 @@ GROUP BY position;
 ![image](https://user-images.githubusercontent.com/127700723/226064050-dfc46049-9b2f-49ee-88ce-170e229c86c2.png)
 <br />
 <br />
-I made an interesting observation. I noticed the bench press averages were significantly higher for players who played 2 positions. I decided to comare the averages between players who are listed at 1 and 2 positions.
+I made an interesting observation. I noticed the bench press averages were significantly higher for players who played 2 positions. I decided to compare the averages between players who are listed at 1 and 2 positions.
 
 ```
 # From the result of the previous query, I noticed that those who played 2 positions on average had a higher bench press, decided to compare 2 VS 1 position stats
@@ -189,7 +193,7 @@ GROUP BY position
 <a href="https://imgur.com/GoQ5UDn"><img src="https://i.imgur.com/GoQ5UDn.png" title="source: imgur.com" /></a>
 <br />
 <br />
-<h3>Question 4, find average height and tallest/shortest players.</h3>
+<h3>Question 4, finding average height and tallest/shortest players.</h3>
  
 ```
 # Finds the tallest and shortest player in each position and lists their names
@@ -208,7 +212,7 @@ ORDER BY tallest_height DESC;
 <a href="https://imgur.com/CCumtqE"><img src="https://i.imgur.com/CCumtqE.png" title="source: imgur.com" /></a>
 <br />
 <br />
-<h3>Question 5, Average minutes played per position.</h3>
+<h3>Question 5, finding average minutes played per position.</h3>
 
 ```
 # Finds the average minutes of each position per game
@@ -220,9 +224,9 @@ GROUP BY position
 
 
 <H2>Conclusion</H2>
-I gained a lot of insight through my analysis. My most noteable observation was that the average player who is listed at
-2 positions is able to bench press almost 2 reps (25%) more than a player who plays a single position across all positions. 
-This  indicates stregnth is important factor of being a more vercitile player. I also spotted average minutes played among
+I gained a lot of insight through my analysis. My most notable observation was that the average player who is listed at
+2 positions can bench press almost 2 reps (25%) more than a player who plays a single position across all positions. 
+This indicates strength is an important factor in being a more versatile player. I also spotted average minutes played among
 players who played 2 positions were higher than those with 1 by about %15. However, only 30% of players who were drafted 
 identified themselves as a 2 position player. 
 
