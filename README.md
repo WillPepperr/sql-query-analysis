@@ -220,7 +220,7 @@ GROUP BY position
 
 
 <H2>Conclusion</H2>
-I learned a lot from working with this dataset. My most noteable observation was that the average player who is listed at
+I gained a lot of insight through my analysis. My most noteable observation was that the average player who is listed at
 2 positions is able to bench press almost 2 reps (25%) more than a player who plays a single position across all positions. 
 This  indicates stregnth is important factor of being a more vercitile player. I also spotted average minutes played among
 players who played 2 positions were higher than those with 1 by about %15. However, only 30% of players who were drafted 
