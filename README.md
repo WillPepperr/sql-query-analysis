@@ -7,7 +7,7 @@
 The NBA began recording measurements of NBA prospects before the 2000-2001 NBA season. Since then, many athletes choose to have their physical attributes recorded to impress teams and advance their draft position. I wanted to compare the results of the positions of players entering the draft and how their position affects their physical attributes. My goal is to answer the following question. What physical attributes, on average, does an aspiring NBA draft selection need, for his position, to have to be picked and play in the NBA? 
 <br />
 <br />
-I thought of 5 main questions an analyst must know to understand the data.
+I thought of 5 guiding questions an analyst must know to understand the data.
 <br />
 <br />
 1. How many players were drafted in each position that played in NBA games?
