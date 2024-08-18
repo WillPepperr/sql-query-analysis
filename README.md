@@ -121,7 +121,7 @@ WHERE position LIKE '%SG-PG%'
 <br />
 <br />
 
-<h3>Question 1, finding how many were drafted in each position.</h3>
+<h3>Question 1: Finding how many players were drafted in each position.</h3>
 
 ```
 # Used LIKE because some players play multiple positions
@@ -152,7 +152,7 @@ WHERE position LIKE '%C%'
 ```
 <br />
 <br />
-<h3>Question 2, finding the average vertical jump and bench press for each position.</h3>
+<h3>Question 2 Finding the average vertical jump and bench press for each position.</h3>
 
 ```
 # Find the average vertical and bench press for each position
@@ -164,7 +164,7 @@ GROUP BY position;
 ![image](https://user-images.githubusercontent.com/127700723/226064050-dfc46049-9b2f-49ee-88ce-170e229c86c2.png)
 <br />
 <br />
-I made an interesting observation. I noticed the bench press averages were significantly higher for players who played 2 positions. I decided to compare the averages between players who are listed at 1 and 2 positions.
+I made an interesting observation. I noticed the bench press averages were significantly higher for players who played 2 positions. I decided to compare the averages between players listed at 1 and 2 positions.
 
 ```
 # From the result of the previous query, I noticed that those who played 2 positions on average had a higher bench press, decided to compare 2 VS 1 position stats
@@ -184,7 +184,7 @@ GROUP BY group_position;
 <br />
 <br />
 
-<h3>Question 3, finding the average draft selection by position.</h3>
+<h3>Question 3: Finding the average draft selection by position.</h3>
 
 ```
 
@@ -198,7 +198,7 @@ GROUP BY position
 <a href="https://imgur.com/GoQ5UDn"><img src="https://i.imgur.com/GoQ5UDn.png" title="source: imgur.com" /></a>
 <br />
 <br />
-<h3>Question 4, finding average height and tallest/shortest players.</h3>
+<h3>Question 4: Finding average height and tallest/shortest players.</h3>
  
 ```
 # Finds the tallest and shortest player in each position and lists their names
@@ -217,7 +217,7 @@ ORDER BY tallest_height DESC;
 <a href="https://imgur.com/CCumtqE"><img src="https://i.imgur.com/CCumtqE.png" title="source: imgur.com" /></a>
 <br />
 <br />
-<h3>Question 5, finding average minutes played per position.</h3>
+<h3>Question 5: Finding average minutes played per position.</h3>
 
 ```
 # Finds the average minutes of each position per game
